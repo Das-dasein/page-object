@@ -35,6 +35,10 @@ class RegistrationPage {
         return this.driver.findElement(By.css('.tabs__item.active .js-form-errors'))
     }
 
+    get logMessageText() {
+        return this.logMessage.getText();
+    }
+
     constructor(driver) {
         this.driver = driver;
     }
@@ -46,6 +50,15 @@ class RegistrationPage {
             const classList = await regTab.getAttribute('class');
             return classList.includes('active');
         }, 3000);
+    }
+
+    async setUser(user) {
+        await this.setPassword(user.password);
+        await this.setPhone(user.phone);
+        await this.setName(user.name);
+        await this.setLastname(user.lastname);
+        await this.setConfirmPassword(user.password);
+        await this.setEmail(user.email);
     }
 
     async setPhone(phoneNumber) {
